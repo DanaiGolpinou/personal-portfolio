@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Danai Golpinou | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -13,7 +13,7 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       display: flex;
       min-height: 100vh;
       color: #2e2e2e;
@@ -50,7 +50,7 @@
       background-color: #5c7f67;
       padding: 10px 20px;
       border-radius: 4px;
-      font-weight: 500;
+      font-weight: 400;
       transition: background 0.3s ease;
       margin-bottom: 10px;
       text-align: left;
@@ -63,7 +63,7 @@
 
     h1 {
       font-size: 36px;
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 10px;
     }
 
@@ -80,7 +80,7 @@
 
     h2 {
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 12px;
       color: #3c4a3d;
     }
@@ -169,11 +169,11 @@
     }
 
     #dice-result {
-      font-size: 2rem;
+      font-size: 4rem;
       margin-bottom: 10px;
     }
 
-    input[type="number"]::placeholder {
+    input::placeholder {
       color: #999;
     }
 
@@ -245,7 +245,7 @@
         <div class="clock-container" id="clock-container"></div>
       </div>
       <div id="formatter" class="tab-content" style="display:none">
-        <textarea id="text-input" rows="4" cols="40"></textarea><br>
+        <textarea id="text-input" rows="4" cols="40" placeholder="Type or paste your text here..."></textarea><br>
         <button onclick="formatText('upper')">UPPER</button>
         <button onclick="formatText('lower')">lower</button>
         <button onclick="formatText('proper')">Proper</button>
@@ -255,7 +255,7 @@
         <button onclick="rollDice()">Roll Dice</button>
       </div>
       <div id="counter" class="tab-content" style="display:none">
-        <textarea id="char-input" rows="4" cols="40" oninput="updateCount()"></textarea>
+        <textarea id="char-input" rows="4" cols="40" oninput="updateCount()" placeholder="Type or paste your text here to count characters..."></textarea>
         <p>Characters: <span id="char-count">0</span></p>
       </div>
     </section>
