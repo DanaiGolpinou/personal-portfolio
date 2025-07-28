@@ -14,10 +14,19 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f5f5f5;
       display: flex;
       min-height: 100vh;
       color: #2e2e2e;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background-color: #fdfdfb;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
     }
 
     .left-panel {
@@ -31,8 +40,25 @@
       padding: 60px 40px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      background-color: #fdfdfb;
+      justify-content: flex-start;
+    }
+
+    .button-link, .theme-toggle {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      background-color: #5c7f67;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      margin-bottom: 10px;
+      text-align: left;
+      width: fit-content;
+    }
+
+    .button-link:hover, .theme-toggle:hover {
+      background-color: #3d5b4f;
     }
 
     h1 {
@@ -77,19 +103,78 @@
       color: #5c7f67;
     }
 
-    .button-link {
-      display: inline-block;
-      text-decoration: none;
-      color: #fff;
-      background-color: #5c7f67;
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-weight: 500;
-      transition: background 0.3s ease;
+    .tabs {
+      display: flex;
+      flex-direction: column;
     }
 
-    .button-link:hover {
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-buttons button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: #5c7f67;
+      color: white;
+      cursor: pointer;
+    }
+
+    .tab-buttons button.active {
       background-color: #3d5b4f;
+    }
+
+    .tab-content {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .dark-mode .tab-content {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+      border-color: #444;
+    }
+
+    .clock-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: monospace;
+    }
+
+    .clock-row {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .clock-row::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #ccc;
+      margin-left: 100px;
+      margin-right: 0;
+    }
+
+    #dice-result {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"]::placeholder {
+      color: #999;
     }
 
     @media (max-width: 900px) {
@@ -111,13 +196,15 @@
     }
   </style>
 </head>
-<body>
+<body class="light-mode">
 
   <div class="left-panel"></div>
 
   <div class="right-panel">
+    <button class="theme-toggle" id="theme-toggle">Light/Dark Mode</button>
+    <a class="button-link" href="https://github.com/DanaiGolpinou" target="_blank">Contact me on GitHub</a>
     <h1>Danai Golpinou</h1>
-    <p class="subtitle">Junior Web Developer in Progress</p>
+    <p class="subtitle">Web Developer in Progress</p>
 
     <section>
       <h2>About</h2>
@@ -129,16 +216,135 @@
       <ul>
         <li>HTML5 / CSS3</li>
         <li>Basic Java, Python</li>
-        <li>Git & GitHub</li>
         <li>Adobe Photoshop</li>
         <li>Magento, ERP platforms</li>
       </ul>
     </section>
 
-    <section>
-      <a class="button-link" href="https://github.com/DanaiGolpinou" target="_blank">Contact me on GitHub</a>
+    <section class="tabs">
+      <div class="tab-buttons">
+        <button onclick="openTab('calc')">Calculator</button>
+        <button onclick="openTab('clock')">World Clock</button>
+        <button onclick="openTab('formatter')">Text Formatter</button>
+        <button onclick="openTab('dice')">Dice Roller</button>
+        <button onclick="openTab('counter')">Character Counter</button>
+      </div>
+      <div id="calc" class="tab-content" style="display:none">
+        <input type="number" id="num1" placeholder="Number 1"> 
+        <select id="operator">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">×</option>
+          <option value="/">÷</option>
+        </select>
+        <input type="number" id="num2" placeholder="Number 2"> 
+        <button onclick="calculate()">=</button>
+        <p id="calc-result"></p>
+      </div>
+      <div id="clock" class="tab-content" style="display:none">
+        <div class="clock-container" id="clock-container"></div>
+      </div>
+      <div id="formatter" class="tab-content" style="display:none">
+        <textarea id="text-input" rows="4" cols="40"></textarea><br>
+        <button onclick="formatText('upper')">UPPER</button>
+        <button onclick="formatText('lower')">lower</button>
+        <button onclick="formatText('proper')">Proper</button>
+      </div>
+      <div id="dice" class="tab-content" style="display:none">
+        <p id="dice-result">🎲 🎲</p>
+        <button onclick="rollDice()">Roll Dice</button>
+      </div>
+      <div id="counter" class="tab-content" style="display:none">
+        <textarea id="char-input" rows="4" cols="40" oninput="updateCount()"></textarea>
+        <p>Characters: <span id="char-count">0</span></p>
+      </div>
     </section>
   </div>
 
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      body.classList.toggle('dark-mode');
+      const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', currentTheme);
+    });
+
+    function openTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function calculate() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operator = document.getElementById('operator').value;
+      let result;
+      if (!isNaN(num1) && !isNaN(num2)) {
+        switch(operator) {
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case '*': result = num1 * num2; break;
+          case '/': result = num2 !== 0 ? num1 / num2 : 'Error'; break;
+        }
+        document.getElementById('calc-result').textContent = 'Result: ' + result;
+      }
+    }
+
+    function updateClock() {
+      const zones = [
+        { name: 'New York', offset: -4 },
+        { name: 'London', offset: 0 },
+        { name: 'Athens', offset: 3 },
+        { name: 'Dubai', offset: 4 },
+        { name: 'Tokyo', offset: 9 }
+      ];
+
+      const now = new Date();
+      const container = document.getElementById('clock-container');
+      container.innerHTML = '';
+
+      zones.forEach(zone => {
+        const localTime = new Date(now.getTime() + zone.offset * 60 * 60 * 1000);
+        const timeStr = localTime.toUTCString().slice(17, 25);
+        const row = document.createElement('div');
+        row.className = 'clock-row';
+        row.innerHTML = `<strong>${zone.name}</strong><span>${timeStr}</span>`;
+        container.appendChild(row);
+      });
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function formatText(mode) {
+      let text = document.getElementById('text-input').value;
+      if (mode === 'upper') text = text.toUpperCase();
+      else if (mode === 'lower') text = text.toLowerCase();
+      else if (mode === 'proper') text = text.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
+      document.getElementById('text-input').value = text;
+    }
+
+    function rollDice() {
+      const dice = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+      const die1 = dice[Math.floor(Math.random() * 6)];
+      const die2 = dice[Math.floor(Math.random() * 6)];
+      document.getElementById('dice-result').textContent = `${die1} ${die2}`;
+    }
+
+    function updateCount() {
+      const text = document.getElementById('char-input').value;
+      document.getElementById('char-count').textContent = text.length;
+    }
+  </script>
 </body>
 </html>
