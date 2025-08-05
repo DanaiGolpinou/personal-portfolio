@@ -1,201 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Danai Golpinou | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      display: flex;
-      min-height: 100vh;
-      color: #2e2e2e;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.light-mode {
-      background-color: #fdfdfb;
-    }
-
-    body.dark-mode {
-      background-color: #121212;
-      color: #f5f5f5;
-    }
-
-    .left-panel {
-      width: 40%;
-      background: url("aesthetic-building.jpeg") no-repeat center center;
-      background-size: cover;
-    }
-
-    .right-panel {
-      width: 60%;
-      padding: 60px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-
-    .button-link, .theme-toggle {
-      display: inline-block;
-      text-decoration: none;
-      color: #fff;
-      background-color: #5c7f67;
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-weight: 400;
-      transition: background 0.3s ease;
-      margin-bottom: 10px;
-      text-align: left;
-      width: fit-content;
-    }
-
-    .button-link:hover, .theme-toggle:hover {
-      background-color: #3d5b4f;
-    }
-
-    h1 {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    p.subtitle {
-      font-size: 18px;
-      font-weight: 300;
-      color: #666;
-      margin-bottom: 30px;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 12px;
-      color: #3c4a3d;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-      padding-left: 16px;
-      position: relative;
-    }
-
-    ul li::before {
-      content: "▹";
-      position: absolute;
-      left: 0;
-      color: #5c7f67;
-    }
-
-    .tabs {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .tab-buttons {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .tab-buttons button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      background-color: #5c7f67;
-      color: white;
-      cursor: pointer;
-    }
-
-    .tab-buttons button.active {
-      background-color: #3d5b4f;
-    }
-
-    .tab-content {
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 4px;
-      background-color: #fff;
-      color: #000;
-    }
-
-    .dark-mode .tab-content {
-      background-color: #1e1e1e;
-      color: #f5f5f5;
-      border-color: #444;
-    }
-
-    .clock-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-family: monospace;
-    }
-
-    .clock-row {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      padding-bottom: 5px;
-    }
-
-    .clock-row::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: #ccc;
-      margin-left: 100px;
-      margin-right: 0;
-    }
-
-    #dice-result {
-      font-size: 4rem;
-      margin-bottom: 10px;
-    }
-
-    input::placeholder {
-      color: #999;
-    }
-
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-
-      .left-panel, .right-panel {
-        width: 100%;
-      }
-
-      .left-panel {
-        height: 250px;
-      }
-
-      .right-panel {
-        padding: 40px 20px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="light-mode">
 
   <div class="left-panel"></div>
@@ -208,7 +21,8 @@
 
     <section>
       <h2>About</h2>
-      <p>I’m transitioning into the tech field from a strong background in digital content and e-commerce. I value thoughtful design, clean code, and quiet confidence.</p>
+      <p>I’m transitioning into the tech field from a strong background in digital content and e-commerce. I value
+        thoughtful design, clean code, and quiet confidence.</p>
     </section>
 
     <section>
@@ -230,14 +44,14 @@
         <button onclick="openTab('counter')">Character Counter</button>
       </div>
       <div id="calc" class="tab-content" style="display:none">
-        <input type="number" id="num1" placeholder="Number 1"> 
+        <input type="number" id="num1" placeholder="Number 1">
         <select id="operator">
           <option value="+">+</option>
           <option value="-">-</option>
           <option value="*">×</option>
           <option value="/">÷</option>
         </select>
-        <input type="number" id="num2" placeholder="Number 2"> 
+        <input type="number" id="num2" placeholder="Number 2">
         <button onclick="calculate()">=</button>
         <p id="calc-result"></p>
       </div>
@@ -255,96 +69,14 @@
         <button onclick="rollDice()">Roll Dice</button>
       </div>
       <div id="counter" class="tab-content" style="display:none">
-        <textarea id="char-input" rows="4" cols="40" oninput="updateCount()" placeholder="Type or paste your text here to count characters..."></textarea>
+        <textarea id="char-input" rows="4" cols="40" oninput="updateCount()"
+          placeholder="Type or paste your text here to count characters..."></textarea>
         <p>Characters: <span id="char-count">0</span></p>
       </div>
     </section>
   </div>
 
-  <script>
-    const toggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      body.classList.remove('light-mode');
-      body.classList.add('dark-mode');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      body.classList.toggle('dark-mode');
-      const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-      localStorage.setItem('theme', currentTheme);
-    });
-
-    function openTab(id) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-
-    function calculate() {
-      const num1 = parseFloat(document.getElementById('num1').value);
-      const num2 = parseFloat(document.getElementById('num2').value);
-      const operator = document.getElementById('operator').value;
-      let result;
-      if (!isNaN(num1) && !isNaN(num2)) {
-        switch(operator) {
-          case '+': result = num1 + num2; break;
-          case '-': result = num1 - num2; break;
-          case '*': result = num1 * num2; break;
-          case '/': result = num2 !== 0 ? num1 / num2 : 'Error'; break;
-        }
-        document.getElementById('calc-result').textContent = 'Result: ' + result;
-      }
-    }
-
-    function updateClock() {
-      const zones = [
-        { name: 'New York', offset: -4 },
-        { name: 'London', offset: 0 },
-        { name: 'Athens', offset: 3 },
-        { name: 'Dubai', offset: 4 },
-        { name: 'Tokyo', offset: 9 }
-      ];
-
-      const now = new Date();
-      const container = document.getElementById('clock-container');
-      container.innerHTML = '';
-
-      zones.forEach(zone => {
-        const localTime = new Date(now.getTime() + zone.offset * 60 * 60 * 1000);
-        const timeStr = localTime.toUTCString().slice(17, 25);
-        const row = document.createElement('div');
-        row.className = 'clock-row';
-        row.innerHTML = `<strong>${zone.name}</strong><span>${timeStr}</span>`;
-        container.appendChild(row);
-      });
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function formatText(mode) {
-      let text = document.getElementById('text-input').value;
-      if (mode === 'upper') text = text.toUpperCase();
-      else if (mode === 'lower') text = text.toLowerCase();
-      else if (mode === 'proper') text = text.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
-      document.getElementById('text-input').value = text;
-    }
-
-    function rollDice() {
-      const dice = ['⚀','⚁','⚂','⚃','⚄','⚅'];
-      const die1 = dice[Math.floor(Math.random() * 6)];
-      const die2 = dice[Math.floor(Math.random() * 6)];
-      document.getElementById('dice-result').textContent = `${die1} ${die2}`;
-    }
-
-    function updateCount() {
-      const text = document.getElementById('char-input').value;
-      document.getElementById('char-count').textContent = text.length;
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
+
 </html>
